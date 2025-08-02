@@ -21,6 +21,9 @@ import java.util.Queue;
  * which used to find topological sort of a graph. as we know that topological sort is
  * applicable only on DAG (Directed Acyclic Graph). So we if a graph has cycle then topological
  * sort will not be possible. and this is the intuition behind solving this proble using BFS.
+ *
+ * time: O(V + E)
+ * space: O(V + E)
  */
 public class DetectCycleInDirectedGraphUsingBFS {
     // Convert the edge list to an adjacency list representation
