@@ -1,10 +1,11 @@
 package graph.bfs;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
+ * @author Ripan Baidya
+ * @date 04-08-2025
+ *
  * Given an undirected graph with V vertices numbered from 0 to V-1 and E edges, represented as a 2D array edges[][],
  * where each entry edges[i] = [u, v] denotes an edge between vertices u and v.
  *
@@ -15,62 +16,64 @@ import java.util.Queue;
  *
  * Input: V = 5, edges[][] = [[0, 1], [2, 1], [3, 4]]
  * Output: [[0, 1, 2], [3, 4]]
+ *
+ * time: O(V + E)
+ * space: O(V + E), Adjacency list: O(V + E), Visited array: O(V), Queue and result lists: O(V) in the worst
+ * case (for a single component).
  */
 public class ConnectedComponentsInAnUndirectedGraph {
-    private ArrayList<ArrayList<Integer>> convertToAdjacencyList(int V, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+    // convert the 2d matrix to adj list
+    private List<List<Integer>> convertToAdjacencyList(int V, int[][] edges) {
+        List<List<Integer>> adjList = new ArrayList<>();
 
-        for(int i = 0; i < V; i++)
-            adj.add(new ArrayList<>());
+        for(int i = 0; i < V; i++) adjList.add(new ArrayList<>());
 
         for(int[] edge : edges) {
             int u = edge[0];
             int v = edge[1];
 
-            adj.get(u).add(v);
-            adj.get(v).add(u);
+            adjList.get(u).add(v);
+            adjList.get(v).add(u);
         }
 
-        return adj;
+        return adjList;
     }
 
-    private ArrayList<Integer> bfs(int node, ArrayList<ArrayList<Integer>> adj,
-                                   boolean[] vis, ArrayList<Integer> res) {
-        Queue<Integer> q = new LinkedList<>();
+    private List<Integer> bfs(int source, List<List<Integer>> adj, boolean[] vis, List<Integer> result) {
+        vis[source] = true; // mark node as visited
 
-        // mark the node as visited and add it to the queue
-        vis[node] = true;
-        q.offer(node);
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(source);
 
         while(!q.isEmpty()) {
-            node = q.poll();
-            res.add(node);
+            int node = q.poll();
+            result.add(node);
 
-            for(int it : adj.get(node)) {
-                if(!vis[it]) {
-                    q.offer(it);
-                    vis[it] = true;
+            for(int adjNode : adj.get(node)) {
+                if(!vis[adjNode]) {
+                    q.offer(adjNode);
+                    vis[adjNode] = true;
                 }
             }
         }
 
-        return res;
+        return result;
     }
 
-    public ArrayList<ArrayList<Integer>> getComponents(int V, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj = convertToAdjacencyList(V, edges);
+    public List<List<Integer>> getComponents(int V, int[][] edges) {
+        List<List<Integer>> adjList = convertToAdjacencyList(V, edges);
 
-        // to store the connected components
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        // list of list to store the connected components
+        List<List<Integer>> result = new ArrayList<>();
         boolean[] vis = new boolean[V];
 
         for(int i = 0; i < V; i ++) {
             if(!vis[i]) {
-                ArrayList<Integer> temp = bfs(i, adj, vis, new ArrayList<>());
-                res.add(temp);
+                List<Integer> temp = bfs(i, adjList, vis, new ArrayList<>());
+                result.add(temp);
             }
         }
 
-        return res;
+        return result;
     }
 }
