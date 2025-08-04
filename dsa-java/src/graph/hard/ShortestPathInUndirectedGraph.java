@@ -21,43 +21,44 @@ import java.util.Queue;
 public class ShortestPathInUndirectedGraph {
     // Function to find the shortest path in an unweighted graph using BFS
     public int[] shortestPath(ArrayList<ArrayList<Integer>> adjList, int source) {
-        int numVertices = adjList.size();
+        int V = adjList.size();
 
-        // Array to store the shortest distance from the source to each node
-        int[] shortestDistance = new int[numVertices];
-        Arrays.fill(shortestDistance, Integer.MAX_VALUE);  // Initially, set all distances to infinity
+        // distance array to store the shortest distance from the source to each currNode
+        int[] dist = new int[V];
+        Arrays.fill(dist, (int) 1e9);  // Initially, set all distances to infinity
 
         // Queue for BFS traversal: each element is {node, distance from source}
         Queue<int[]> queue = new LinkedList<>();
-        shortestDistance[source] = 0;  // Distance to source is 0
+        dist[source] = 0;  // source to source is distance 0
         queue.offer(new int[]{source, 0});
 
-        // (BFS)
+        // bfs
         while (!queue.isEmpty()) {
-            int currentNode = queue.peek()[0];
-            int currentDistance = queue.peek()[1];
+            int node = queue.peek()[0];
+            int currDist = queue.peek()[1];
             queue.poll();
 
-            int newDistance = currentDistance + 1;  // For unweighted graph, each edge adds +1
+            int newDistance = currDist + 1;  // For unweighted graph, each edge adds +1
 
             // Traverse all adjacent nodes
-            for (int neighbor : adjList.get(currentNode)) {
-                // If a shorter path to neighbor is found
-                if (newDistance < shortestDistance[neighbor]) {
-                    shortestDistance[neighbor] = newDistance;
-                    queue.offer(new int[]{neighbor, newDistance});
+            for (int adjNode : adjList.get(node)) {
+
+                // If a shorter path to adjNode is found
+                if (newDistance < dist[adjNode]) {
+                    dist[adjNode] = newDistance;
+                    queue.offer(new int[]{adjNode, newDistance});
                 }
             }
         }
 
-        // Replace unreachable node distances with -1
-        for (int i = 0; i < numVertices; i++) {
-            if (shortestDistance[i] == Integer.MAX_VALUE) {
-                shortestDistance[i] = -1;
+        // Replace unreachable currNode distances with -1
+        for (int i = 0; i < V; i++) {
+            if (dist[i] == Integer.MAX_VALUE) {
+                dist[i] = -1;
             }
         }
 
-        return shortestDistance;
+        return dist;
     }
 
 }
