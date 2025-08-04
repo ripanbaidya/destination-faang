@@ -1,6 +1,7 @@
 package graph.hard;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * @author Ripan Baidya
@@ -87,9 +88,11 @@ public class ShortestPathInDirectedAcyclicGraph {
         }
 
         // Step 5: Replace unreachable node distances with -1
-        for (int i = 0; i < V; i++) {
-            if (dist[i] == (int) 1e9) dist[i] = -1;
-        }
+        IntStream.range(0, V).forEach(i -> {
+            if (dist[i] == (int) 1e9) {
+                dist[i] = -1;
+            }
+        });
 
         return dist;
     }
