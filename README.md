@@ -1,3 +1,5 @@
+![faang](https://i.pinimg.com/1200x/29/5e/42/295e42c377ee768dbc126443bcf4bd97.jpg)
+
 # Destination FAANG
 
 If you're crazy like me 😁 about cracking FAANG 😎, then you're in the right place! This repository and its resources are designed to supercharge your preparation.
@@ -11,4 +13,4 @@ You'll find **top-quality DSA interview problems** along with their **Java and C
 ```
 https://github.com/baidya-ripan-024/destination-FAANG.git
 ```
-Thank You 👊🙏!!
+Thank You 🙏!!
