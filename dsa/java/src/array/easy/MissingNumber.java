@@ -9,11 +9,12 @@ package array.easy;
  *
  * Input: nums = [3,0,1]
  * Output: 2
- * Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3].
- * 2 is the missing number in the range since it does not appear in nums.
+ * Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the
+ * missing number in the range since it does not appear in nums.
  */
 
 /**
+ * // Better solution
  * class Solution {
  *     public int missingNumber(int[] nums) {
  *         int n = nums.length;
@@ -36,6 +37,7 @@ package array.easy;
  * }
  */
 public class MissingNumber {
+    // Optimal solution
     public int missingNumber(int[] nums) {
         int n = nums.length;
         int sumN = (n* (n+1))/2; // Sum of first n natural numbers
@@ -47,5 +49,14 @@ public class MissingNumber {
 
         // The missing number is the difference between the expected sum and the actual sum
         return sumN - actualSum;
+    }
+
+    public static void main(String[] args) {
+        MissingNumber obj = new MissingNumber();
+
+        int[] nums = {3,0,1};
+        int missingNumber = obj.missingNumber(nums);
+
+        System.out.println("Missing number: "+ missingNumber);
     }
 }
