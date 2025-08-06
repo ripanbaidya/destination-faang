@@ -12,6 +12,7 @@ import java.util.Map;
  * Note: A subarray is a contiguous part of an array, formed by selecting one or more consecutive
  * elements while maintaining their original order.
  *
+ * Example:
  * Input: arr[] = [15, -2, 2, -8, 1, 7, 10, 23]
  * Output: 5
  * Explanation: The longest subarray with sum equals to 0 is [-2, 2, -8, 1, 7].
@@ -20,7 +21,9 @@ public class LongestSubArray_0_Sum {
     int maxLen(int nums[]) {
         int n = nums.length;
         int maxiLen = 0, prefSum = 0;
-        Map<Integer, Integer> mp = new HashMap<>(); // {prefSum, index}
+
+        // {prefSum, index}
+        Map<Integer, Integer> mp = new HashMap<>();
 
         for(int i = 0; i < n; i ++){
             prefSum += nums[i];
@@ -42,7 +45,7 @@ public class LongestSubArray_0_Sum {
     }
 
     public static void main(String[] args) {
-        LongestSubArray_0_Sum obj = new LongestSubArray_0_Sum();
+        var obj = new LongestSubArray_0_Sum();
 
         int[] nums = {15, -2, 2, -8, 1, 7, 10, 23};
         int result = obj.maxLen(nums);
