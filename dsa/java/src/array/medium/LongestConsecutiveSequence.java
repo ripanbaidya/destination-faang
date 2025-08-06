@@ -6,8 +6,8 @@ import java.util.Arrays;
  * @author Ripan Baidya
  * @date 31-07-2025
  *
- * Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
- * You must write an algorithm that runs in O(n) time.
+ * Given an unsorted array of integers nums, return the length of the longest consecutive elements
+ * sequence. You must write an algorithm that runs in O(n) time.
  *
  * Example:
  * Input: nums = [100,4,200,1,3,2]
