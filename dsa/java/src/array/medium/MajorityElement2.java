@@ -18,50 +18,50 @@ public class MajorityElement2 {
     // optimal solution
     public List<Integer> majorityElement(int[] nums) {
         int n = nums.length;
-        List<Integer> ans = new ArrayList<Integer>();
 
-        int cnt1 = 0, cnt2 = 0;
-        int ele1 = Integer.MIN_VALUE, ele2 = Integer.MIN_VALUE;
+        int count1 = 0, count2 = 0; // count of element1 and element2
+        int element1 = Integer.MIN_VALUE, element2 = Integer.MIN_VALUE;
+        List<Integer> ans = new ArrayList<>(); // to store the majority elements
 
         for (int i = 0; i < n; i ++){
-            if(cnt1 == 0 && nums[i] != ele2){
-                cnt1 = 1;
-                ele1 = nums[i];
-            } else if(cnt2 == 0 && nums[i] != ele1){
-                cnt2 = 1;
-                ele2 = nums[i];
-            } else if(ele1 == nums[i]){
-                cnt1 ++;
-            } else if(ele2 == nums[i]){
-                cnt2 ++;
+            if(count1 == 0 && nums[i] != element2){
+                count1 = 1;
+                element1 = nums[i];
+            } else if(count2 == 0 && nums[i] != element1){
+                count2 = 1;
+                element2 = nums[i];
+            } else if(element1 == nums[i]){
+                count1 ++;
+            } else if(element2 == nums[i]){
+                count2 ++;
             } else {
-                cnt1 --;
-                cnt2 --;
+                count1 --;
+                count2 --;
             }
         }
 
-        // reset the counts
-        cnt1 = 0;
-        cnt2 = 0;
+        // resetting count of element1 and element2 to 0
+        // to count the occurrence of element1 and element2 manually
+        count1 = 0;
+        count2 = 0;
 
         // counting the occurrence manually
         for(int num : nums){
-            if(ele1 == num) cnt1 ++;
-            else if(ele2 == num) cnt2 ++;
+            if(element1 == num) count1 ++;
+            else if(element2 == num) count2 ++;
         }
 
-        if(cnt1 > n/3) ans.add(ele1);
-        if(cnt2 > n/3) ans.add(ele2);
+        if(count1 > n/3) ans.add(element1);
+        if(count2 > n/3) ans.add(element2);
 
         return ans;
     }
 
     public static void main(String[] args) {
-        MajorityElement2 obj = new MajorityElement2();
+        var obj = new MajorityElement2();
 
         int[] nums = {3, 2, 3};
         List<Integer> result = obj.majorityElement(nums);
-
         System.out.println(Arrays.toString(nums));
     }
 }
