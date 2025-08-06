@@ -44,4 +44,19 @@ public class RotateMatrix {
             reverse(row);
         }
     }
+
+    public static void main(String[] args) {
+        var obj = new RotateMatrix();
+
+        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        obj.rotate(matrix);
+
+        System.out.println("Rotated matrix: ");
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
 }
