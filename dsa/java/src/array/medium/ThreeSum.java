@@ -55,6 +55,7 @@ public class ThreeSum {
         List<List<Integer>> result = new ArrayList<>();
 
         for (int i = 0; i < n; i ++){
+            // skip element if it is same as previous
             if(i != 0 && nums[i] == nums[i-1]) continue;
 
             int j = i+1;
@@ -90,7 +91,6 @@ public class ThreeSum {
 
         int[] nums = {-1,0,1,2,-1,-4};
         List<List<Integer>> result = obj.threeSum(nums);
-
         System.out.println(result);
     }
 }
