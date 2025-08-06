@@ -33,4 +33,13 @@ public class SecondLargestElement {
 
         return secMaxi;
     }
+
+    public static void main(String[] args) {
+        SecondLargestElement obj = new SecondLargestElement();
+
+        int[] arr = {12, 35, 1, 10, 34, 1};
+        int secondLargest = obj.getSecondLargest(arr);
+
+        System.out.println("Second largest element: "+ secondLargest);
+    }
 }
