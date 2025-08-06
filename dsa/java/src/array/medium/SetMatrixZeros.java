@@ -59,14 +59,10 @@ public class SetMatrixZeros {
     public static void main(String[] args) {
         SetMatrixZeros obj = new SetMatrixZeros();
 
-        int[][] matrix = {
-            {1,1,1},
-            {1,0,1},
-            {1,1,1}
-        };
-
+        int[][] matrix = {{1,1,1}, {1,0,1}, {1,1,1}};
         obj.setZeroes(matrix);
 
+        System.out.println("Matrix after setting zeros: ");
         for (int [] row : matrix) {
             for (int val : row) {
                 System.out.println(val +" ");
