@@ -62,6 +62,7 @@ public class MajorityElement2 {
 
         int[] nums = {3, 2, 3};
         List<Integer> result = obj.majorityElement(nums);
+
         System.out.println(Arrays.toString(nums));
     }
 }
