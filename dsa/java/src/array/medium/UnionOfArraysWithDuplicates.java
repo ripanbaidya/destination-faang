@@ -11,7 +11,8 @@ import java.util.Arrays;
  * arrays. If an element appears more than once in one or both arrays, it should be included
  * only once in the result.
  * Note: Elements of a[] and b[] are not necessarily distinct.
- * Note that, You can return the Union in any order but the driver code will print the result in sorted order only.
+ * Note that, You can return the Union in any order but the driver code will print the result
+ * in sorted order only.
  *
  * Input: a[] = [1, 2, 3, 2, 1], b[] = [3, 2, 2, 3, 3, 2]
  * Output: [1, 2, 3]
@@ -70,5 +71,12 @@ public class UnionOfArraysWithDuplicates {
         }
 
         return count;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3, 2, 1};
+        int[] b = {3, 2, 2, 3, 3, 2};
+        UnionOfArraysWithDuplicates obj = new UnionOfArraysWithDuplicates();
+        System.out.println(obj.findUnion(a, b));
     }
 }
