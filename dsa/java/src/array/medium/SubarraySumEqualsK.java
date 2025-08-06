@@ -7,8 +7,8 @@ import java.util.Map;
  * @author Ripan Baidya
  * @date 31-07-2025
  *
- * Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k
- * A subarray is a contiguous non-empty sequence of elements within an array.
+ * Given an array of integers nums and an integer k, return the total number of subarrays whose sum
+ * equals to k A subarray is a contiguous non-empty sequence of elements within an array.
  *
  * Example
  * Input: nums = [1,1,1], k = 2
@@ -20,7 +20,8 @@ public class SubarraySumEqualsK {
         Map<Integer, Integer> mp = new HashMap<>();
         int prefSum = 0, totalCnt = 0;
 
-        mp.put(0, 1); // to handle case when prefix sum itself is equal to k
+        // to handle case when prefix sum itself is equal to k
+        mp.put(0, 1);
 
         for (int i = 0; i < n; i++) {
             prefSum += nums[i];
