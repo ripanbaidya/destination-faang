@@ -8,7 +8,8 @@ package array.easy;
  *
  * Input: nums = [1,1,0,1,1,1]
  * Output: 3
- * Explanation: The first two digits or the last three digits are consecutive 1s. The maximum number of consecutive 1s is 3.
+ * Explanation: The first two digits or the last three digits are consecutive 1s. The
+ * maximum number of consecutive 1s is 3.
  */
 public class MaximumConsecutiveOnes {
     public int findMaxConsecutiveOnes(int[] nums) {
@@ -28,5 +29,14 @@ public class MaximumConsecutiveOnes {
         }
 
         return maxiCount;
+    }
+
+    public static void main(String[] args) {
+        MaximumConsecutiveOnes obj = new MaximumConsecutiveOnes();
+
+        int[] nums = {1,1,0,1,1,1};
+        int maximumConsecutiveOnes = obj.findMaxConsecutiveOnes(nums);
+
+        System.out.println(maximumConsecutiveOnes);
     }
 }
