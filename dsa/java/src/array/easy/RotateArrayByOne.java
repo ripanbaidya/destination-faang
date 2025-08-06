@@ -1,5 +1,7 @@
 package array.easy;
 
+import java.util.Arrays;
+
 /**
  * @author Ripan Baidya
  * @date 30-07-2025
@@ -8,7 +10,8 @@ package array.easy;
  *
  * Input: arr[] = [1, 2, 3, 4, 5]
  * Output: [5, 1, 2, 3, 4]
- * Explanation: If we rotate arr by one position in clockwise 5 come to the front and remaining those are shifted to the end.
+ * Explanation: If we rotate arr by one position in clockwise 5 come to the front
+ * and remaining those are shifted to the end.
  */
 public class RotateArrayByOne {
     private void reverse(int[] arr, int s, int e) {
@@ -26,5 +29,14 @@ public class RotateArrayByOne {
 
         reverse(arr, 0, n-2);
         reverse(arr, 0, n-1);
+    }
+
+    public static void main(String[] args) {
+        RotateArrayByOne obj = new RotateArrayByOne();
+
+        int[] arr = {1, 2, 3, 4, 5};
+        obj.rotate(arr);
+
+        System.out.println(Arrays.toString(arr));
     }
 }
