@@ -18,7 +18,6 @@ package array.medium;
  */
 // this problem is similar to leetcode: 122. Best Time to Buy and Sell Stock II
 public class StockBuySell_MultipleTransactionAllowed {
-    // optimal solution
     public int maximumProfit(int prices[]) {
         int n = prices.length;
         int maxiProfit = 0;
@@ -45,11 +44,10 @@ public class StockBuySell_MultipleTransactionAllowed {
     }
 
     public static void main(String[] args) {
-        StockBuySell_MultipleTransactionAllowed obj = new StockBuySell_MultipleTransactionAllowed();
+        var obj = new StockBuySell_MultipleTransactionAllowed();
 
         int[] prices = {100, 180, 260, 310, 40, 535, 695};
         int maximumProfit = obj.maximumProfit(prices);
-
         System.out.println("Maximum Profit: "+ maximumProfit);
     }
 }
