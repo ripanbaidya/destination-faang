@@ -22,12 +22,14 @@ import java.util.Queue;
  * Example:
  * Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
  * Output: 5
- * Explanation: One shortest transformation sequence is "hit" -> "hot" -> "dot" -> "dog" -> cog", which is 5 words long.
+ * Explanation: One shortest transformation sequence is "hit" -> "hot" -> "dot" -> "dog" -> cog", which
+ * is 5 words long.
  *
  * time: O(word.length * 26 * N * log n)
  * space: O(N)
  */
 public class WordLadder {
+    // Custom Pair class to hold the current word and the number of steps taken to reach it
     static class Pair {
         String word;
         int steps;
@@ -37,34 +39,52 @@ public class WordLadder {
             this.steps = steps;
         }
     }
+
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        // Queue for BFS traversal
         Queue<Pair> q = new LinkedList<>();
-        q.offer(new Pair(beginWord, 1));
+        q.offer(new Pair(beginWord, 1)); // Start with beginWord at step 1
 
+        // Set for fast lookup of words and to avoid revisiting
         HashSet<String> st = new HashSet(wordList);
-        st.remove(beginWord);
+        st.remove(beginWord); // No need to process beginWord again
 
+        // BFS
         while (!q.isEmpty()) {
-            Pair pair = q.poll();
+            Pair pair = q.poll(); // Get the front element in the queue
             String word = pair.word;
             int steps = pair.steps;
 
+            // If we've reached the endWord, return the number of steps taken
             if (word.equals(endWord)) return steps;
 
-            for (int i = 0; i < word.length(); i ++) {
-                for (char ch = 'a'; ch <= 'z'; ch ++) {
+            // Try changing each character in the word to every letter from 'a' to 'z'
+            for (int i = 0; i < word.length(); i++) {
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    // Create a new word by replacing one character
                     char[] replacedCharArray = word.toCharArray();
                     replacedCharArray[i] = ch;
                     String replacedWord = new String(replacedCharArray);
 
+                    // If the new word is in the set, add it to the queue for further exploration
                     if (st.contains(replacedWord)) {
-                        q.offer(new Pair(replacedWord, steps+1));
-                        st.remove(replacedWord);
+                        q.offer(new Pair(replacedWord, steps + 1));
+                        st.remove(replacedWord); // Remove to prevent revisiting
                     }
                 }
             }
         }
 
+        // If endWord was never reached
         return 0;
+    }
+
+    public static void main(String[] args) {
+        var obj = new WordLadder();
+        String beginWord = "hit", endWord = "cog";
+        List<String> wordList = List.of("hot","dot","dog","lot","log","cog");
+
+        int ladderLength = obj.ladderLength(beginWord, endWord, wordList);
+        System.out.println("Length of ladder: " + ladderLength);
     }
 }
