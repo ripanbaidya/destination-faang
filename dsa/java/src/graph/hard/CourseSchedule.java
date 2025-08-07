@@ -34,12 +34,10 @@ public class CourseSchedule {
         for (int i = 0; i < V; i ++){
             adj[i] = new ArrayList<>();
         }
-
         for (int edge[] : edges) {
             int u = edge[0];
             int v = edge[1];
-
-            adj[v].add(u); // directed
+            adj[v].add(u);
         }
 
         return adj;
@@ -47,7 +45,7 @@ public class CourseSchedule {
 
     public ArrayList<Integer> findOrder(int V, int[][] prerequisites) {
         List<Integer>[] adj = constructAdj(V, prerequisites);
-        int[] indegree = new int[V]; // in-degree
+        int[] indegree = new int[V]; // in-degree array
 
         // count the in-degree of each vertex
         for (int i = 0; i < V; i ++) {
@@ -68,12 +66,12 @@ public class CourseSchedule {
             }
         }
 
-        // bfs
+        // BFS
         while (!q.isEmpty()) {
-            int node = q.poll();
-            topo.add(node);
+            int currNode = q.poll();
+            topo.add(currNode);
 
-            for (int adjNode : adj[node]) {
+            for (int adjNode : adj[currNode]) {
                 indegree[adjNode] --;
 
                 if (indegree[adjNode] == 0) {
