@@ -50,20 +50,23 @@ public class PathWithMinimumEffort {
         // BFS
         while (!pq.isEmpty()) {
             int[] top = pq.poll();
-            int currDiff = top[0], row = top[1], col = top[2];
+            int currDiff = top[0];
+            int currRow = top[1];
+            int currCol = top[2];
 
-            // when we reach the destination
-            if (row == n-1 && col == m-1){
+            // when we reach the at the destination
+            if (currRow == n-1 && currCol == m-1){
                 return currDiff;
             }
 
             for (int i = 0; i < 4; i ++) {
                 // neighbours row & col
-                int nrow = row + delRow[i];
-                int ncol = col + delCol[i];
+                int nrow = currRow + delRow[i];
+                int ncol = currCol + delCol[i];
 
+                // check if the neighbour is valid
                 if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m) {
-                    int newEffort = Math.max(Math.abs(heights[nrow][ncol] - heights[row][col]), currDiff);
+                    int newEffort = Math.max(Math.abs(heights[nrow][ncol] - heights[currRow][currCol]), currDiff);
 
                     // only update the distance if it is less
                     if (newEffort < diff[nrow][ncol]) {
@@ -75,5 +78,12 @@ public class PathWithMinimumEffort {
         }
 
         return 0;
+    }
+
+    public static void main(String[] args) {
+        var obj = new PathWithMinimumEffort();
+
+        int[][] heights = {{1,2,2},{3,8,2},{5,3,5}}; // 2
+        System.out.println(obj.minimumEffortPath(heights));
     }
 }
