@@ -75,7 +75,6 @@ public class CourseSchedule {
 
         int numCourse = 5;
         int[][] prerequisites = {{0, 1}, {0, 2}, {1, 2}, {2, 0}, {2, 3}};
-
         boolean canFinish = obj.canFinish(numCourse, prerequisites);
         System.out.println("Can finish all courses: " + canFinish);
     }
