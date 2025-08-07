@@ -5,13 +5,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Given an undirected graph with V vertices numbered from 0 to V-1 and E edges, represented as a 2D array edges[][],
- * where each entry edges[i] = [u, v] denotes an edge between vertices u and v.
+ * Given an undirected graph with V vertices numbered from 0 to V-1 and E edges, represented as a
+ * 2D array edges[][],where each entry edges[i] = [u, v] denotes an edge between vertices u and v.
  *
- * Your task is to return a list of all connected components. Each connected component should be represented as a list
- * of its vertices, with all components returned in a collection where each component is listed separately.
+ * Your task is to return a list of all connected components. Each connected component should  be
+ * represented as a list of its vertices, with all components returned in a collection where each
+ * component is listed separately. You can return the components in any order, driver code will
+ * print the components in sorted order.
  *
- * Note: You can return the components in any order, driver code will print the components in sorted order.
+ * Example:
  *
  * Input: V = 5, edges[][] = [[0, 1], [2, 1], [3, 4]]
  * Output: [[0, 1, 2], [3, 4]]
@@ -72,5 +74,14 @@ public class ConnectedComponentsInAnUndirectedGraph {
         }
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        var obj = new ConnectedComponentsInAnUndirectedGraph();
+
+        int V = 5;
+        int[][] edges = {{0, 1}, {2, 1}, {3, 4}};
+        ArrayList<ArrayList<Integer>> components = obj.getComponents(V, edges);
+        System.out.println(components);
     }
 }
