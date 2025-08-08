@@ -12,14 +12,15 @@ import java.util.*;
  * You are also given three integers src, dst, and k, return the cheapest price from src to
  * dst with at most k stops. If there is no such route, return -1.
  *
- * Input: n = 4, src = 0, dst = 3, k = 1, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]],
+ * Input:
+ * flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], n = 4,src = 0,dst = 3,k = 1
  * Output: 700
- * Explanation:
- * The graph is shown above.
- * The optimal path with at most 1 stop from city 0 to 3 is marked in red and has cost 100 + 600 = 700.
- * Note that the path through cities [0,1,2,3] is cheaper but is invalid because it uses 2 stops.
+ * Explanation: The optimal path with at most 1 stop from city 0 to 3 has cost 100 + 600 = 700.
  */
 public class CheapestFlightsWithinKStops {
+    // constant for infinity
+    final int INF = Integer.MAX_VALUE;
+
     // convert edge list into an adjacency list
     private List<List<int[]>> convertToAdjList(int V, int[][] edges) {
         List<List<int[]>> adj = new ArrayList<>();
@@ -28,23 +29,23 @@ public class CheapestFlightsWithinKStops {
         }
 
         for (int[] edge : edges) {
-            int u = edge[0], v = edge[1], wt = edge[2];
-            adj.get(u).add(new int[]{v, wt}); // directed
+            adj.get(edge[0]).add(new int[]{edge[1], edge[2]});
         }
 
         return adj;
     }
+
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         List<List<int[]>> adj = convertToAdjList(n, flights);
 
-        // declare and initialize distance array
-        int[] dist = new int[n];
-        Arrays.fill(dist, (int) 1e9);
+        // declare and initialize cost array
+        int[] cost = new int[n];
+        Arrays.fill(cost, INF);
 
         // update the source destination and put it into queue
-        // each node: {stops, node, distance}
+        // each node: {stops, node, cost}
         Queue<int[]> q = new LinkedList<>();
-        dist[src] = 0;
+        cost[src] = 0;
         q.offer(new int[]{0, src, 0});
 
         // BFS
@@ -52,25 +53,35 @@ public class CheapestFlightsWithinKStops {
             int[] top = q.poll();
             int currStop = top[0];
             int currNode = top[1];
-            int currDist = top[2];
+            int currCost = top[2];
 
-            // dont go beyond k
+            // If we've exceeded k stops, skip further traversal
             if (currStop > k) continue;
 
             // iterate through all adjacent nodes
             for (int[] neighbour : adj.get(currNode)) {
                 int adjNode = neighbour[0];
-                int edgeWt = neighbour[1];
+                int edgeCost = neighbour[1];
 
-                if ((currDist + edgeWt) < dist[adjNode] && currStop <= k) {
-                    dist[adjNode] = currDist + edgeWt;
-                    q.offer(new int[]{currStop+1, adjNode, dist[adjNode]});
+                if ((currCost + edgeCost) < cost[adjNode] && currStop <= k) {
+                    cost[adjNode] = currCost + edgeCost;
+                    q.offer(new int[]{currStop+1, adjNode, cost[adjNode]});
                 }
             }
         }
 
         // if the destination is unreachable then return -1
-        // else return the distance
-        return dist[dst] == (int) 1e9 ? -1 : dist[dst];
+        // else return the cost
+        return cost[dst] == INF ? -1 : cost[dst];
+    }
+
+    public static void main(String[] args) {
+        var obj = new CheapestFlightsWithinKStops();
+
+        int[][] flights = {{0,1,100},{1,2,100},{2,0,100},{1,3,600},{2,3,200}}; // 700
+        int n = 4, src = 0, dst = 3, k = 1;
+
+        int cost = obj.findCheapestPrice(n, flights, src, dst, k);
+        System.out.println("Cheapest price: " + cost);
     }
 }
