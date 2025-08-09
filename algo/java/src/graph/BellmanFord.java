@@ -66,7 +66,7 @@ public class BellmanFord {
         int[][] edges = new int[][]{{1, 3, 2}, {4, 3, -1}, {2, 4, 1}, {1, 2, 1}, {0, 1, 5}};
         int src = 0;
 
-        int[] dist = new BellmanFordAlgorithm().bellmanFord(V, edges, src);
+        int[] dist = new BellmanFord().bellmanFord(V, edges, src);
 
         // print shortest distances from source to all vertices
         for (int i = 0; i < V; i ++) {
