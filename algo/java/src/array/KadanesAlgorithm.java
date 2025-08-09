@@ -34,7 +34,7 @@ public class KadanesAlgorithm {
         return maxiSum;
     }
     public static void main(String[] args) {
-        var obj = new KadanesAlgorithm_MaximumSubArraySum();
+        var obj = new KadanesAlgorithm();
 
         int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
         int maximumSum = obj.maxSubArray(nums);
