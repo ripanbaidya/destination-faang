@@ -1,6 +1,4 @@
-Absolutely, Ripan! Here's a comprehensive and well-organized markdown table covering **all 100** of your array-related FAANG prep problems, grouped by category and ordered from easy to harder difficulty. I’ve left the **Problem Link** and **Status** columns blank for your personalized updates—feel free to fill in as you practice or teach.
-
----
+## **📌 Array Problems for FAANG Interviews**
 
 ### Array Problems Organized by Category
 
