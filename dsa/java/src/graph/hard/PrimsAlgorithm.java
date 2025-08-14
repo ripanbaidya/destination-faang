@@ -15,6 +15,9 @@ import java.util.PriorityQueue;
  *
  * Input: V = 3, E = 3, Edges = [[0, 1, 5], [1, 2, 3], [0, 2, 1]]
  * Output: 4
+ *
+ * time: O((V + E) * logV), for both the adjacency list construction and the priority queue operations.
+ * space: O(V + E), due to the adjacency list and the priority queue storage.
  */
 public class PrimsAlgorithm {
     // convert edge list into an adjacency list
