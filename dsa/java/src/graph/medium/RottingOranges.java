@@ -17,64 +17,69 @@ import java.util.Queue;
  * Output: 4
  */
 public class RottingOranges {
-    class Triplet {
-        int row, col, time;
-
-        public Triplet(int row, int col, int time) {
-            this.row = row;
-            this.col = col;
-            this.time = time;
-        }
+    private boolean isValidCell(int row, int col, int n, int m) {
+        return row >= 0 && row < n && col >= 0 && col < m;
     }
-
     public int orangesRotting(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
 
-        int countFreshOrange = 0;
-        int minTime = 0, orangeRotten = 0;
+        int cntFreshOranges = 0; // count of fresh oranges
+        int cntFreshToRotten = 0; // count of fresh oranges that becomes rotten
+        int minTime = 0; // minimum time to rotten all fresh oranges
 
         int[][] vis = new int[n][m];
-        Queue<Triplet> q = new LinkedList<>();
+        Queue<int[]> q = new LinkedList<>(); // {row, col, time}
 
         for(int i = 0; i < n; i ++) {
             for(int j = 0; j < m; j ++) {
                 if(grid[i][j] == 2) {
-                    vis[i][j] = 2;
-                    q.offer(new Triplet(i, j, 0));
+                    vis[i][j] = 1;
+                    q.offer(new int[]{i, j, 0});
                 } else if(grid[i][j] == 1){
-                    countFreshOrange ++;
+                    cntFreshOranges ++;
                 }
             }
         }
 
-        int[] drow = {-1, 0, 1, 0};
-        int[] dcol = {0, 1, 0, -1};
+        // up, down, left, right
+        int[] delRow = {-1, 0, 1, 0};
+        int[] delCol = {0, 1, 0, -1};
 
-        while(!q.isEmpty()) {
-            Triplet curr = q.poll();
+        // bfs
+        while (!q.isEmpty()) {
+            int[] top = q.poll();
+            int currRow = top[0];
+            int currCol = top[1];
+            int currTime = top[2];
 
-            int row = curr.row;
-            int col = curr.col;
-            int time = curr.time;
+            minTime = currTime; // updating the minimum time
 
-            minTime = Math.max(minTime, time);
+            for (int i = 0; i < 4; i ++) {
+                int adjRow = currRow + delRow[i];
+                int adjCol = currCol + delCol[i];
 
-            for(int i = 0; i < 4; i ++) {
-                int currRow = row + drow[i];
-                int currCol = col + dcol[i];
-
-                if(currRow >= 0 && currRow < n && currCol >= 0 && currCol < m
-                        && grid[currRow][currCol] == 1 && vis[currRow][currCol] != 2) {
-
-                    q.offer(new Triplet(currRow, currCol, time+1));
-                    vis[currRow][currCol] = 2; // rotten
-                    orangeRotten ++;
+                if (isValidCell(adjRow, adjCol, n, m)
+                        && grid[adjRow][adjCol] == 1 && vis[adjRow][adjCol] == 0) {
+                    q.offer(new int[]{adjRow, adjCol, currTime +1});
+                    vis[adjRow][adjCol] = 1;
+                    cntFreshToRotten ++;
                 }
             }
         }
 
-        return orangeRotten != countFreshOrange ? -1 : minTime;
+        if (cntFreshOranges != cntFreshToRotten)
+            return -1; // not all fresh oranges become rotten in given time
 
+        return minTime;
+    }
+
+    public static void main(String[] args) {
+        var obj = new RottingOranges();
+
+        int[][] grid = {{2,1,1},{1,1,0},{0,1,1}};
+        int minimumTime = obj.orangesRotting(grid);
+
+        System.out.println("Minimum time to rotten all fresh oranges: " + minimumTime);
     }
 }
