@@ -1,11 +1,11 @@
 package graph.hard;
 
-class DisjointSet {
+class DSU {
     int[] parent;
     int[] rank;
     int[] size;
 
-    public DisjointSet(int n) {
+    public DSU(int n) {
         parent = new int[n + 1];
         rank = new int[n + 1];
         size = new int[n + 1];
@@ -62,7 +62,7 @@ class DisjointSet {
 }
 public class UnionFind {
     public static void main(String[] args) {
-        var ds = new DisjointSet(7);
+        var ds = new DSU(7);
 
         ds.unionBySize(1, 2);
         ds.unionBySize(2, 3);

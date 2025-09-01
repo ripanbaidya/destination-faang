@@ -16,44 +16,12 @@ import java.util.*;
  * Input: n = 4, m = 5, k = 4, A = {{1,1},{0,1},{3,3},{3,4}}
  * Output: 1 1 2 2
  */
-class DSU {
-    int[] parent;
-    int[] size;
-
-    public DSU(int n) {
-        parent = new int[n+1];
-        size = new int[n+1];
-
-        for (int i = 0; i <= n; i++) {
-            parent[i] = i;
-            size[i] = 1;
-        }
-    }
-
-    public int findParent(int node) {
-        if (node == parent[node])
-            return node;
-        return parent[node] = findParent(parent[node]);
-    }
-
-    public void unionBySize(int u, int v) {
-        int pu = findParent(u);
-        int pv = findParent(v);
-
-        if (pu == pv) return;
-        if (size[pu] < size[pv]) {
-            parent[pu] = pv;
-            size[pv] += size[pu];
-        } else {
-            parent[pv] = pu;
-            size[pu] += size[pv];
-        }
-    }
-}
 public class NumberOfIslandsII {
+    // check whether the current row and column is valid or invalid
     private boolean isValid(int row, int col, int n, int m) {
         return row >= 0 && row < n && col >= 0 && col < m;
     }
+
     public List<Integer> numOfIslands(int n, int m, int[][] operators) {
         DSU ds = new DSU(n*m);
         List<Integer> ans = new ArrayList<>();
@@ -99,5 +67,15 @@ public class NumberOfIslandsII {
         }
 
         return ans;
+    }
+
+    public static void main(String[] args) {
+        NumberOfIslandsII obj = new NumberOfIslandsII();
+
+        int n = 4, m = 5, k = 4;
+        int[][]A = {{1,1},{0,1},{3,3},{3,4}};
+
+        List<Integer> islands = obj.numOfIslands(n, m, A);
+        System.out.println(islands);
     }
 }

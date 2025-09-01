@@ -13,42 +13,10 @@ package graph.hard;
  * and the jth city are directly connected, and isConnected[i][j] = 0 otherwise.
  *
  * Return the total number of provinces.
+ *
+ * Input: isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+ * Output: 2
  */
-class DSU {
-    int[] rank;
-    int[] parent;
-    public DSU(int n) {
-        rank = new int[n+1];
-        parent = new int[n+1];
-
-        for (int i = 0; i <= n; i ++) {
-            rank[i] = 0;
-            parent[i] = i;
-        }
-    }
-
-    public int findParent(int n) {
-        if (n == parent[n])
-            return n;
-
-        return parent[n] = findParent(parent[n]);
-    }
-
-    public void union(int u, int v) {
-        int pu = findParent(u);
-        int pv = findParent(v);
-
-        if (pu == pv) return;
-        if (rank[pu] < rank[pv]) {
-            parent[pu] = pv;
-        } else if (rank[pu] > rank[pv]) {
-            parent[pv] = pu;
-        } else {
-            parent[pv] = pu;
-            rank[pu] ++;
-        }
-    }
-}
 public class NumberOfProvincesUsingDisjointSet {
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
@@ -59,7 +27,7 @@ public class NumberOfProvincesUsingDisjointSet {
             for (int j = 0; j < n; j ++) {
                 if (isConnected[i][j] == 1
                         && dsu.findParent(i) != dsu.findParent(j))
-                    dsu.union(i, j);
+                    dsu.unionBySize(i, j);
             }
         }
 
@@ -71,5 +39,13 @@ public class NumberOfProvincesUsingDisjointSet {
         }
 
         return components;
+    }
+
+    public static void main(String[] args) {
+        NumberOfProvincesUsingDisjointSet obj = new NumberOfProvincesUsingDisjointSet();
+
+        int[][] isConnected = {{1,1,0},{1,1,0},{0,0,1}};
+        int numberOfProvinces = obj.findCircleNum(isConnected);
+        System.out.println("Number of provinces are: " + numberOfProvinces);
     }
 }

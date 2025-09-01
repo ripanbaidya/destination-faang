@@ -1,55 +1,7 @@
 package graph.hard;
 
 import java.util.*;
-/**
- * @author Ripan Baidya
- * @date 16-08-2025
- *
- * You are given an n x n binary matrix grid. You are allowed to change at most one 0 to be 1.
- * Return the size of the largest island in grid after applying this operation. An island  is
- * a 4-directionally connected group of 1s.
- *
- * Example:
- *
- * Input: grid = [[1,0],[0,1]]
- * Output: 3
- * Explanation: Change one 0 to 1 and connect two 1s, then we get an island with area = 3.
- */
-class DSU {
-    int[] parent;
-    int[] size;
 
-    public DSU(int n) {
-        parent = new int[n + 1];
-        size = new int[n + 1];
-
-        for (int i = 0; i <= n; i++) {
-            parent[i] = i;
-            size[i] = 1;
-        }
-    }
-
-    public int findParent(int node) {
-        if (node == parent[node])
-            return node;
-        return parent[node] = findParent(parent[node]);
-    }
-
-    public void unionBySize(int u, int v) {
-        int pu = findParent(u);
-        int pv = findParent(v);
-
-        if (pu == pv)
-            return;
-        if (size[pu] < size[pv]) {
-            parent[pu] = pv;
-            size[pv] += size[pu];
-        } else {
-            parent[pv] = pu;
-            size[pu] += size[pv];
-        }
-    }
-}
 public class MakingLargeIsland {
     private boolean isValid(int row, int col, int n) {
         return row >= 0 && row < n && col >= 0 && col < n;
@@ -58,9 +10,6 @@ public class MakingLargeIsland {
     /**
      * Find the largest island by changing 0's to 1's while ensuring that all
      * 1's are connected.
-     *
-     * @param grid the grid of 0's and 1's
-     * @return the size of the largest island
      */
     public int largestIsland(int[][] grid) {
         int n = grid.length; // number of rows
